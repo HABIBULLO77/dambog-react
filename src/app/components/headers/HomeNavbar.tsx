@@ -131,6 +131,17 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                 onClick={handleLogoutClick}
               />
             )}
+            <Box className="signup">
+              {!authMember ? (
+                <Button
+                  className={"signup-button"}
+                  variant={"contained"}
+                  onClick={() => setSignupOpen(true)}
+                >
+                  SIGN UP
+                </Button>
+              ) : null}
+            </Box>
             <Menu
               anchorEl={anchorEl}
               id="account-menu"
@@ -182,20 +193,6 @@ export default function HomeNavbar(props: HomeNavbarProps) {
             </Box>
             <Box className={"wel-txt"}>The Choice, not just a choice</Box>
             <Box className={"service-txt"}>24 hours service</Box>
-            <Box className="signup">
-              {!authMember ? (
-                <Button
-                  className={"signup-button"}
-                  variant={"contained"}
-                  onClick={() => setSignupOpen(true)}
-                >
-                  SIGN UP
-                </Button>
-              ) : null}
-            </Box>
-          </Stack>
-          <Stack className={"logo-frame"}>
-            <div className="logo-img"></div>
           </Stack>
         </Stack>
       </Container>
