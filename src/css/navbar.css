@@ -34,9 +34,11 @@
 }
 
 .home-navbar .navbar-container .menu .links {
+  min-width: 700px;
   display: flex;
-  justify-content: flex-end;
-  gap: 20px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .home-navbar .navbar-container .menu .links a {
@@ -134,28 +136,34 @@
 }
 
 .other-navbar .navbar-container {
+  margin-top: 0;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .other-navbar .navbar-container .menu {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 50px;
+  width: 100%;
+  padding: 20px 50px;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .other-navbar .navbar-container .menu .brand-logo {
   width: 130px;
+  height: auto;
 }
 
 .other-navbar .navbar-container .menu .links {
+  min-width: 700px;
   display: flex;
-  gap: 30px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .other-navbar .navbar-container .menu .links a {
