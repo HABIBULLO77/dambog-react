@@ -15,7 +15,7 @@ import { setProducts } from "./slice";
 import { Product, ProductInquiry } from "../../../lib/types/product";
 import { retrieveProducts } from "./selector";
 import ProductService from "../../services/ProductService";
-import { ProductCollection } from "../../../lib/enums/product.enum";
+import { ProductType } from "../../../lib/enums/product.enum";
 import { serverApi } from "../../../lib/config";
 import { OrderStatus } from "../../../lib/enums/order.enum";
 import { useHistory } from "react-router-dom";
@@ -42,7 +42,7 @@ export default function Products(props: ProductsProps) {
     page: 1, //backendga
     limit: 8,
     order: "createdAt",
-    productCollection: ProductCollection.DISH,
+    productType: ProductType.MEN,
     search: "",
   });
 
@@ -66,9 +66,9 @@ export default function Products(props: ProductsProps) {
 
   /* Handlers */
 
-  const searchCollectionHandler = (collection: ProductCollection) => {
+  const searchCollectionHandler = (collection: ProductType) => {
     productSearch.page = 1;
-    productSearch.productCollection = collection;
+    productSearch.productType = collection;
     setProductSearch({ ...productSearch });
   };
 
@@ -99,7 +99,7 @@ export default function Products(props: ProductsProps) {
         <Stack flexDirection={"column"} alignItems={"center"}>
           <Stack className={"avatar-big-box"}>
             <Stack className={"top-text"}>
-              <p>Burak Restaurant</p>
+              <p>Dambog Shoes</p>
               <Stack className={"single-search-big-box"}>
                 <input
                   type={"search"}
@@ -173,68 +173,35 @@ export default function Products(props: ProductsProps) {
                 <Button
                   variant={"contained"}
                   color={
-                    productSearch.productCollection === ProductCollection.OTHER
+                    productSearch.productType === ProductType.UNISEX
                       ? "primary"
                       : "secondary"
                   }
-                  onClick={() =>
-                    searchCollectionHandler(ProductCollection.OTHER)
-                  }
+                  onClick={() => searchCollectionHandler(ProductType.UNISEX)}
                 >
-                  Other
+                  Unisex
                 </Button>
                 <Button
                   variant={"contained"}
                   color={
-                    productSearch.productCollection ===
-                    ProductCollection.DESSERT
+                    productSearch.productType === ProductType.WOMEN
                       ? "primary"
                       : "secondary"
                   }
-                  onClick={() =>
-                    searchCollectionHandler(ProductCollection.DESSERT)
-                  }
+                  onClick={() => searchCollectionHandler(ProductType.WOMEN)}
                 >
-                  Dessert
+                  Women
                 </Button>
                 <Button
                   variant={"contained"}
                   color={
-                    productSearch.productCollection === ProductCollection.DRINK
+                    productSearch.productType === ProductType.MEN
                       ? "primary"
                       : "secondary"
                   }
-                  onClick={() =>
-                    searchCollectionHandler(ProductCollection.DRINK)
-                  }
+                  onClick={() => searchCollectionHandler(ProductType.MEN)}
                 >
-                  Drink
-                </Button>
-                <Button
-                  variant={"contained"}
-                  color={
-                    productSearch.productCollection === ProductCollection.SALAD
-                      ? "primary"
-                      : "secondary"
-                  }
-                  onClick={() =>
-                    searchCollectionHandler(ProductCollection.SALAD)
-                  }
-                >
-                  Salad
-                </Button>
-                <Button
-                  variant={"contained"}
-                  color={
-                    productSearch.productCollection === ProductCollection.DISH
-                      ? "primary"
-                      : "secondary"
-                  }
-                  onClick={() =>
-                    searchCollectionHandler(ProductCollection.DISH)
-                  }
-                >
-                  Dish
+                  Men
                 </Button>
               </div>
             </Stack>
@@ -243,10 +210,10 @@ export default function Products(props: ProductsProps) {
               {products.length !== 0 ? (
                 products.map((product: Product) => {
                   const imagePath = `${serverApi}/${product.productImages[0]}`;
-                  const sizeVolume =
-                    product.productCollection === ProductCollection.DRINK
-                      ? product.productVolume + " litre"
-                      : product.productSize + " size";
+                  const sizeVolume = product.productSize;
+                  // product.productType === ProductType.MEN
+                  //   ? product.productVolume + " litre"
+                  //   : product.productSize + " size";
                   return (
                     <Stack
                       key={product._id}

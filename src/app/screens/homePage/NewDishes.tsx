@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { retrieveNewDishes, retrievePopularDishes } from "./selector";
 import { Product } from "../../../lib/types/product";
-import { ProductCollection } from "../../../lib/enums/product.enum";
+import { ProductCollection, ProductType } from "../../../lib/enums/product.enum";
 import { serverApi } from "../../../lib/config";
 
 /** Redux Slice & Selector */
@@ -27,14 +27,14 @@ export default function NewDishes() {
     <div className={"new-products-frame"}>
       <Container>
         <Stack className={"main"}>
-          <Box className={"category-title"}>Fresh Menu</Box>
+          <Box className={"category-title"}>New Products</Box>
           <Stack className={"cards-frame"}>
             <CssVarsProvider>
               {newDishes.length !== 0 ? (
                 newDishes.map((product: Product) => {
                   const imagePath = `${serverApi}/${product.productImages[0]}`;
                   const sizeVolume =
-                    product.productCollection === ProductCollection.DRINK
+                    product.productType === ProductType.MEN
                       ? product.productVolume + "l"
                       : product.productSize + " size";
 

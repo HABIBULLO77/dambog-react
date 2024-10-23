@@ -47,6 +47,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
   const { signupOpen, loginOpen, handleSignupClose, handleLoginClose } = props;
   const classes = useStyles();
   const [memberNick, setMemberNick] = useState<string>("");
+  const [memberEmail, setMemberEmail] = useState<string>("");
   const [memberPhone, setMemberPhone] = useState<string>("");
   const [memberPassword, setMemberPassword] = useState<string>("");
   const { setAuthMember } = useGlobals();
@@ -58,6 +59,9 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
   };
   const handlePhone = (e: T) => {
     setMemberPhone(e.target.value);
+  };
+  const handleEmail = (e: T) => {
+    setMemberEmail(e.target.value);
   };
   const handlePassword = (e: T) => {
     setMemberPassword(e.target.value);
@@ -72,15 +76,19 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
 
   const handleSignupRequest = async () => {
     try {
-      console.log("inputs:", memberNick, memberPhone, memberPassword);
+      console.log("inputs:", memberNick, memberEmail, memberPhone, memberPassword);
       const isFulfill =
-        memberNick !== "" && memberPhone !== "" && memberPassword !== "";
+        memberNick !== "" &&
+        memberEmail !== "" &&
+        memberPhone !== "" &&
+        memberPassword !== "";
       if (!isFulfill) throw new Error(Messages.error3);
 
       const signupInput: MemberInput = {
         memberNick: memberNick,
         memberPhone: memberPhone,
         memberPassword: memberPassword,
+        memberEmail: memberEmail,
       };
 
       const member = new MemberService();
@@ -148,6 +156,13 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                 label="username"
                 variant="outlined"
                 onChange={handleUsername}
+              />
+              <TextField
+                sx={{ marginTop: "7px" }}
+                id="outlined-basic"
+                label="email"
+                variant="outlined"
+                onChange={handleEmail}
               />
               <TextField
                 sx={{ my: "17px" }}
