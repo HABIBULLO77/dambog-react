@@ -210,7 +210,7 @@ export default function Products(props: ProductsProps) {
               {products.length !== 0 ? (
                 products.map((product: Product) => {
                   const imagePath = `${serverApi}/${product.productImages[0]}`;
-                  const sizeVolume = product.productSize;
+                  const sizeVolume = product.productSize + " size";
                   // product.productType === ProductType.MEN
                   //   ? product.productVolume + " litre"
                   //   : product.productSize + " size";
